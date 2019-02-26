@@ -5,33 +5,23 @@ import {
   Button,
   Typography
 } from '@material-ui/core';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import styles from './MemoriiFolderReaderMainList.css';
 
 
-@inject('memoriiStore')
-@observer
-class MemoriiFolderReaderMainList extends Component {
-  constructor (props) {
-    super(props);
+const MemoriiFolderMainList = inject("memoriiStore")(observer((props) => {
+  var currentDocument = props.memoriiStore.currentBrowsedDocument;
+  var childDocuments = [];
+  if (currentDocument.data.childDocuments) {
+    currentDocument.data.childDocuments.forEach(childDocument => {
+      childDocuments.push(props.memoriiStore.getDocument(childDocument));
+    })
   }
-
-  render() {
-    const changeCurrentBrowsedDocument = this.props.memoriiStore.changeCurrentBrowsedDocument;
-    var currentDocument = this.props.currentBrowsedDocument;
-    var childDocuments = [];
-    if (currentDocument.data.childDocuments) {
-      currentDocument.data.childDocuments.forEach(childDocument => {
-        childDocuments.push(this.props.memoriiStore.getDocument(childDocument));
-      })
-    }
-  return (
-      <div style={styles.memoriiFolderReaderListContainer}>
-      {childDocuments.map(d => {
-        return <div onClick={() => this.props.memoriiStore.changeCurrentBrowsedDocument(d)} style={styles.memoriiFolderReaderListTabContainer}>{d.name}</div>
-      })}
-      </div>
-  );
-}
-}
-export default MemoriiFolderReaderMainList;
+return (
+    <div style={styles.memoriiFolderReaderListContainer}>
+    {childDocuments.map(d => {
+      return <div onClick={() => props.memoriiStore.changeCurrentBrowsedDocument(d)} style={styles.memoriiFolderReaderListTabContainer}>{d.name}</div>
+    })}
+    </div>
+)
+}));
+export default MemoriiFolderMainList;

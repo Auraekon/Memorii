@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { observer, inject } from 'mobx-react';
-import TextField from '@material-ui/core/TextField';
 import {
-  Button,
-  Typography
+  Button
 } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import styles from './DocumentFrame.css';
@@ -62,13 +60,11 @@ class DocumentFrame extends Component {
     var currentDocument = this.props.currentBrowsedDocument;
     var linkChain = this.linkChainer(currentDocument);
     var readerComponents = this.getReader(currentDocument);
-
-
   return (
     <div style={styles.mainContainer}>
       <div style={styles.historyBar}>
       
-      </div> 
+      </div>
       <div style={styles.topBar}>
       <div style={styles.topBarReturnButtonContainer}>
       <Button
@@ -76,21 +72,24 @@ class DocumentFrame extends Component {
       >
         <ArrowBack/>
       </Button>
-      
       </div>
       <div style={styles.topBarReaderToolbar}>
+
       {(() => {
         if (readerComponents) {
          return (readerComponents.readerTopBar);
         }
       })()}
+
       </div> 
       </div>
+
       {(() => {
         if (readerComponents) {
          return (readerComponents.readerMainList);
         }
       })()}
+      
     </div>
   );
 }

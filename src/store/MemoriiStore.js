@@ -22,7 +22,7 @@ export default class MemoriiStore extends ApiClient {
     {
       ID: "2",
       typeID: "folder",
-      parentID: "foo",
+      parentID: "1",
       name: "Europe",
       createdDate: "placeHolderDate",
       ModifiedDate: "placeHolderDate",

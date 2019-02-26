@@ -20,7 +20,6 @@ export default class MemoriiMainView extends Component {
   }
 
   render() {
-    console.log(this.props.memoriiStore.documents[0])
     return (
       <Grid item xs={12}>
         <DocumentFrame

@@ -18,9 +18,7 @@
     "react": "^16.4.0",
     "react-app-rewire-mobx": "^1.0.8",
     "react-app-rewired": "^1.5.2",
-    "react-autosuggest": "^9.4.2",
     "react-dom": "^16.4.0",
-    "react-easy-swipe": "0.0.16",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-tabs": "^2.3.0"
