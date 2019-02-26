@@ -5,8 +5,10 @@ import {
   Button,
   Typography
 } from '@material-ui/core';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import styles from './DocumentFrame.css';
+import MemoriiFolderReaderMainList from '../MemoriiFolderReaderMainList/MemoriiFolderReaderMainList';
+import MemoriiFolderReaderTopBar from '../MemoriiFolderReaderTopBar/MemoriiFolderReaderTopBar';
 
 
 @inject('memoriiStore')
@@ -37,16 +39,31 @@ class DocumentFrame extends Component {
     return linkChain;
   }
 
+  getReader(document) {  
+    switch(document.typeID) {
+      case "folder":
+      return {
+        readerMainList:
+        <MemoriiFolderReaderMainList
+        currentBrowsedDocument={document}
+        />,
+        readerTopBar:
+        <MemoriiFolderReaderTopBar
+        currentBrowsedDocument={document}
+        />,
+      };
+      case "text":
+      case "image":
+    }
+  }
+
+
   render() {
-    const changeCurrentBrowsedDocument = this.props.memoriiStore.changeCurrentBrowsedDocument;
     var currentDocument = this.props.currentBrowsedDocument;
     var linkChain = this.linkChainer(currentDocument);
-    var childDocuments = [];
-    if (currentDocument.data.childDocuments) {
-      currentDocument.data.childDocuments.forEach(childDocument => {
-        childDocuments.push(this.props.memoriiStore.getDocument(childDocument));
-      })
-    }
+    var readerComponents = this.getReader(currentDocument);
+
+
   return (
     <div style={styles.mainContainer}>
       <div style={styles.historyBar}>
@@ -57,22 +74,26 @@ class DocumentFrame extends Component {
       <Button
       onClick={() => this.props.memoriiStore.changeCurrentBrowsedDocument(this.getParent(currentDocument))}
       >
-        <AccessAlarmIcon/>
+        <ArrowBack/>
       </Button>
       
       </div>
       <div style={styles.topBarReaderToolbar}>
-      
+      {(() => {
+        if (readerComponents) {
+         return (readerComponents.readerTopBar);
+        }
+      })()}
       </div> 
       </div>
-
-      <div style={styles.documentReaderList}> 
-      {childDocuments.map(d => {
-        return <div onClick={() => this.props.memoriiStore.changeCurrentBrowsedDocument(d)} style={styles.memoriiTabContainer}>{d.name}</div>
-      })}
-      </div>
+      {(() => {
+        if (readerComponents) {
+         return (readerComponents.readerMainList);
+        }
+      })()}
     </div>
   );
 }
 }
 export default DocumentFrame;
+

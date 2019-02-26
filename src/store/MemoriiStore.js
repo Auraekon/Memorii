@@ -5,22 +5,12 @@ const apiURL = 'http://rata.digitraffic.fi/api/v1';
 
 export default class MemoriiStore extends ApiClient {
   @observable
-  currentBrowsedDocument = {
-    ID: "1",
-    TypeID: "document",
-    parentID: "foo",
-    name: "foo",
-    createdDate: "placeHolderDate",
-    ModifiedDate: "placeHolderDate",
-    data: {
-      childDocuments: ["2", "5", "7"],
-    },
-  };
+  currentBrowsedDocument = {};
   @observable
   documents = [
     {
       ID: "1",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "foo",
       name: "World",
       createdDate: "placeHolderDate",
@@ -31,7 +21,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "2",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "foo",
       name: "Europe",
       createdDate: "placeHolderDate",
@@ -42,7 +32,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "3",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "2",
       name: "Spain",
       createdDate: "placeHolderDate",
@@ -53,7 +43,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "4",
-      TypeID: "text",
+      typeID: "folder",
       parentID: "2",
       name: "Italy",
       createdDate: "placeHolderDate",
@@ -64,7 +54,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "5",
-      TypeID: "picture",
+      typeID: "folder",
       parentID: "1",
       name: "Asia",
       createdDate: "placeHolderDate",
@@ -75,7 +65,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "6",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "5",
       name: "China",
       createdDate: "placeHolderDate",
@@ -86,7 +76,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "7",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "5",
       name: "Japan",
       createdDate: "placeHolderDate",
@@ -95,7 +85,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "8",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "1",
       name: "America",
       createdDate: "placeHolderDate",
@@ -106,7 +96,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "9",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "8",
       name: "North",
       createdDate: "placeHolderDate",
@@ -117,7 +107,7 @@ export default class MemoriiStore extends ApiClient {
     },
     {
       ID: "10",
-      TypeID: "document",
+      typeID: "folder",
       parentID: "9",
       name: "USA",
       createdDate: "placeHolderDate",
