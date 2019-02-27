@@ -16,15 +16,12 @@ export default class MemoriiMainView extends Component {
   }
 
   componentDidMount() {
-    this.props.memoriiStore.changeCurrentBrowsedDocument();
   }
 
   render() {
     return (
       <Grid item xs={12}>
-        <DocumentFrame
-        currentBrowsedDocument={this.props.memoriiStore.currentBrowsedDocument}
-         />
+        <DocumentFrame/>
       </Grid>
     );
   }

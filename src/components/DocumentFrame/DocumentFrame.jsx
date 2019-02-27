@@ -52,12 +52,17 @@ class DocumentFrame extends Component {
       };
       case "text":
       case "image":
+      default:
+      return null;
     }
   }
 
+  componentDidMount() {
+    this.props.memoriiStore.changeCurrentBrowsedDocument();
+  }
 
   render() {
-    var currentDocument = this.props.currentBrowsedDocument;
+    var currentDocument = this.props.memoriiStore.currentBrowsedDocument;
     var linkChain = this.linkChainer(currentDocument);
     var readerComponents = this.getReader(currentDocument);
   return (
@@ -75,20 +80,12 @@ class DocumentFrame extends Component {
       </div>
       <div style={styles.topBarReaderToolbar}>
 
-      {(() => {
-        if (readerComponents) {
-         return (readerComponents.readerTopBar);
-        }
-      })()}
+      {readerComponents && readerComponents.readerTopBar}
 
       </div> 
       </div>
 
-      {(() => {
-        if (readerComponents) {
-         return (readerComponents.readerMainList);
-        }
-      })()}
+      {readerComponents && readerComponents.readerMainList}
       
     </div>
   );
